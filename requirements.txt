@@ -1,0 +1,5 @@
+# Python 3.10 or later. The analysis scripts use the standard library only.
+# External tools (not pip-installable):
+#   fpocket 4.1            (pocket detection)
+#   Foldseek 10.941cd33    (entry-search sensitivity re-search)
+#   PyMOL 3.1              (structure renders; figure code is not in this repo)
