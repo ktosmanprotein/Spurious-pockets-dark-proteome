@@ -48,3 +48,24 @@ after it was generated, so re-running the builder would not reproduce it.
 AlphaFold DB v6 models for *P. falciparum*, the fpocket output, and the
 novelty and verification tables of the companion methods paper
 (doi:10.5281/zenodo.23045417).
+
+## Running the audit in Docker
+
+The Python scripts use only the standard library, so the image is just Python 3.11.
+
+Build the image:
+
+    docker build -t spurious-pockets .
+
+Run the audit. Place the data next to the scripts in this layout, then mount the parent folder:
+
+    work/
+      repo/                    scripts plus dark128_*.tsv, table1_shortlist.tsv, paper2_*.tsv
+      pdb100_verification/     verification.tsv, tiers.tsv, ss_211.tsv, novel_211_accessions.txt
+      paper1_methods/          numbers.json
+      paper1_upload/zenodo/01_novelty_tables/
+      ss_316.tsv
+
+    docker run --rm -v /path/to/work:/work spurious-pockets python /work/repo/audit_numbers_p2.py
+
+The fpocket and Foldseek steps (the .command scripts) are not containerized.
